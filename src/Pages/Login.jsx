@@ -10,44 +10,48 @@ export const Login = () => {
   const logindata = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get("https://reqres.in/api/login", {
+      const res = await axios.post("https://reqres.in/api/login", {
         email,
         password,
+      }, {
+        header: {
+          "x-api-key": "reqres-free-v1"
+        }
       });
-      console.log(res.data.token);
-      alert("Successful login");
-    } catch (error) {
-      console.error(error);
-      alert("Login failed");
-    }
+  console.log(res.data.token);
+  alert("Successful login");
+} catch (error) {
+  console.error(error);
+  alert("Login failed");
+}
 };
 
-  return (
-    <DIV>
-      <form onSubmit={logindata}>
-        <h2>Log In</h2>
-        <input
-          data-testid="user-email"
-          type="email"
-          value={email}
-          onChange={(e) => setemail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <input
-          data-testid="user-password"
-          type="password"
-          value={password}
-          onChange={(e) => setpassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit" data-testid="user-login">
-          Log In
-        </button>
-      </form>
-    </DIV>
-  );
+return (
+  <DIV>
+    <form onSubmit={logindata}>
+      <h2>Log In</h2>
+      <input
+        data-testid="user-email"
+        type="email"
+        value={email}
+        onChange={(e) => setemail(e.target.value)}
+        placeholder="Email"
+        required
+      />
+      <input
+        data-testid="user-password"
+        type="password"
+        value={password}
+        onChange={(e) => setpassword(e.target.value)}
+        placeholder="Password"
+        required
+      />
+      <button type="submit" data-testid="user-login">
+        Log In
+      </button>
+    </form>
+  </DIV>
+);
 };
 
 const DIV = styled.div`
